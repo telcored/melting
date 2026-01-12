@@ -5,7 +5,7 @@
 <div>
     <br>
     <h2 class="alert-heading">
-    <i class="fa-solid fa-cart-flatbed"></i> Compras
+        <i class="fa-solid fa-cart-flatbed"></i> Compras
     </h2>
     <br>
 </div>
@@ -41,9 +41,9 @@
                     <th>Fecha</th>
                     <th>Factura</th>
                     <th>Total (CLP)</th>
-                    <th width="220">Acciones</th>
+                    <th width="300">Acciones</th>
                 </tr>
-            </thead>    
+            </thead>
 
             <tbody>
                 @forelse($compras as $compra)
@@ -64,19 +64,23 @@
                         @endif
                     </td>
 
-                    <td>
-                        <a href="{{ route('compras.show', $compra->id) }}" class="btn btn-sm btn-primary">Ver</a>
-                        <a href="{{ route('compras.edit', $compra->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                    <td class="text-nowrap">
+                        <div class="d-flex gap-1 align-items-center">
+                            <a href="{{ route('compras.show', $compra->id) }}" class="btn btn-sm btn-primary">Ver</a>
+                            <a href="{{ route('compras.pdf', $compra->id) }}" class="btn btn-sm btn-danger" target="_blank">
+                                <i class="fa-solid fa-file-pdf"></i> PDF
+                            </a>
+                            <a href="{{ route('compras.edit', $compra->id) }}" class="btn btn-sm btn-warning">Editar</a>
 
-                        <form action="{{ route('compras.destroy', $compra->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit" class="btn btn-sm btn-danger"
-                                onclick="return confirm('¿Seguro que deseas eliminar esta compra?')">
-                                Eliminar
-                            </button>
-                        </form>
+                            <form action="{{ route('compras.destroy', $compra->id) }}" method="POST" class="d-inline m-0">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('¿Seguro que deseas eliminar esta compra?')">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
 

@@ -57,13 +57,14 @@ Route::middleware(['auth'])->group(function () {
     Route::put('users/{user}/password', [UserController::class, 'updatePassword'])->name('users.password.update');
 
     //rutas compras
+    Route::get('compras/{id}/pdf', [CompraController::class, 'generatePdf'])->name('compras.pdf');
     Route::resource('compras', CompraController::class);
 
     //ruta productos
     Route::resource('productos', ProductoController::class);
 
     //rutas para categorias de compras
-    Route::resource('categorias',CategoriaController::class);
+    Route::resource('categorias', CategoriaController::class);
 
     // Asignación de permisos a usuario
     Route::get('users/{user}/permissions', [UserController::class, 'editPermissions'])
